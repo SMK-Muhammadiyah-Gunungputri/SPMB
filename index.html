@@ -770,6 +770,10 @@
             <label for="kip">Nomor KIP / KKS / PKH (jika ada)</label>
             <input type="text" id="kip" name="Nomor KIP/KKS/PKH">
           </div>
+          <div class="form-group full">
+            <label for="motivasiBelajar">Motivasi Belajar</label>
+            <textarea id="motivasiBelajar" name="Motivasi Belajar" placeholder="Contoh: Saya ingin masuk SMK Muhammadiyah Gunungputri agar dapat belajar desain dan mengembangkan keterampilan untuk masa depan." required></textarea>
+          </div>
         </div>
       </fieldset>
 
@@ -877,8 +881,8 @@
             <input type="text" id="tinggalDengan" name="Tinggal Dengan">
           </div>
           <div class="form-group">
-            <label for="jarakRumah">Jarak Rumah ke Sekolah</label>
-            <input type="text" id="jarakRumah" name="Jarak Rumah ke Sekolah">
+            <label for="domsili">Domisili</label>
+            <input type="text" id="domisili" name="Domisili">
           </div>
           <div class="form-group">
             <label for="transportasi">Ke Sekolah Menggunakan</label>
@@ -1169,6 +1173,7 @@ Email Siswa       : ${safe(data["Email Siswa"])}
 HP Siswa          : ${safe(data["HP Siswa"])}
 Cita-cita         : ${safe(data["Cita-cita"])}
 KIP/KKS/PKH       : ${safe(data["Nomor KIP/KKS/PKH"])}
+Motivasi Belajar  : ${safe(data["Motivasi Belajar"])}
 
 =========================
 DATA ORANG TUA / WALI
@@ -1200,7 +1205,7 @@ ALAMAT & TEMPAT TINGGAL
 Alamat Lengkap    : ${safe(data["Alamat Lengkap"])}
 Kode Pos          : ${safe(data["Kode Pos"])}
 Tinggal Dengan    : ${safe(data["Tinggal Dengan"])}
-Jarak ke Sekolah  : ${safe(data["Jarak Rumah ke Sekolah"])}
+Domisili          : ${safe(data["Domisili"])}
 Transportasi      : ${safe(data["Transportasi ke Sekolah"])}
 
 =========================
@@ -1306,9 +1311,55 @@ SMK Muhammadiyah Gunungputri.
             "Accept": "application/json"
           }
         });
+
+         if (!response.ok) {
+          throw new Error("Gagal mengirim data");
+        }
+
+        resultBox.classList.remove("error");
+        resultTitle.innerHTML = "🎉 Pendaftaran Berhasil Dikirim!";
+        resultText.innerHTML = `
+          Selamat <strong>${data["Nama Lengkap"]}</strong>, data Anda telah berhasil dikirim.<br>
+          Nomor Pendaftaran Anda adalah <strong>${data["Nomor Pendaftaran"]}</strong>.
+        `;
+        resultExtra.innerHTML = `
+          🌟 <strong>Langkah Selanjutnya:</strong><br>
+          1. Simpan file bukti pendaftaran Anda.<br>
+          2. Pastikan nomor WhatsApp tetap aktif untuk dihubungi panitia.<br>
+          3. Siapkan seluruh berkas asli untuk proses verifikasi.<br><br>
+          📌 <strong>Tips:</strong> Screenshot halaman ini dan kirim ke orang tua agar data pendaftaran tersimpan dengan aman.
+        `;
+        resultBox.style.display = "block";
+        resultBox.scrollIntoView({ behavior: "smooth", block: "center" });
+
+        form.reset();
+        setTimeout(() => {
+          nomorInput.value = generateRegistrationNumber();
+        }, 500);
+
       } catch (error) {
         console.error("Gagal kirim email:", error);
       }
+
+      resultBox.classList.add("error");
+        resultTitle.innerHTML = "⚠️ Pendaftaran Belum Terkirim Sempurna";
+        resultText.innerHTML = `
+          Bukti pendaftaran Anda <strong>sudah berhasil diunduh</strong>, namun data belum berhasil dikirim ke email panitia.
+        `;
+        resultExtra.innerHTML = `
+          🔔 <strong>Yang harus Anda lakukan:</strong><br>
+          1. Periksa koneksi internet Anda.<br>
+          2. Klik tombol <strong>Kirim</strong> kembali beberapa saat lagi.<br>
+          3. Jika masih gagal, hubungi panitia melalui WhatsApp yang tersedia di pojok kanan bawah.<br><br>
+          💡 Jangan khawatir, file bukti pendaftaran Anda sudah tersimpan di perangkat.
+        `;
+        resultBox.style.display = "block";
+        resultBox.scrollIntoView({ behavior: "smooth", block: "center" });
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Kirim & Download Bukti Pendaftaran";
+      }
+    });
 
       // 4. Siapkan nomor baru
       setTimeout(() => {
