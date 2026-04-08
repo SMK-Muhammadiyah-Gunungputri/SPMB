@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PPDB SMK Muhammadiyah Gunungputri 2026/2027</title>
+
+  <style>
+    :root {
+      --primary: #1E3A8A;
+      --secondary: #FFC107;
+      --accent: #1E5631;
+      --light: #ffffff;
+      --text: #333333;
+      --soft-blue: rgba(30,58,138,0.05);
+      --shadow: 0 8px 24px rgba(0,0,0,0.08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+      background: #fff;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        #ffffff 0px,
+        #ffffff 23px,
+        #dcdcdc 24px
+      );
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), #2747a9);
+      color: white;
+      text-align: center;
+      padding: 2.8rem 1rem 2.2rem;
+      border-bottom: 6px dashed var(--secondary);
+      animation: fadeInDown 1s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before,
+    header::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      z-index: 0;
+    }
+
+    header::before {
+      width: 240px;
+      height: 240px;
+      top: -80px;
+      left: -60px;
+    }
+
+    header::after {
+      width: 300px;
+      height: 300px;
+      bottom: -120px;
+      right: -100px;
+    }
+
+    header > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.6rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-shadow: 2px 2px rgba(0,0,0,0.12);
+      animation: glowTitle 2.5s infinite;
+    }
+
+    header h2 {
+      margin: 0.7rem 0 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      margin-top: 1rem;
+      background: var(--secondary);
+      color: var(--primary);
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+    }
+
+    .container {
+      width: min(1150px, 92%);
+      margin: 2rem auto 6rem;
+    }
+
+    .welcome-card {
+      background: rgba(255,255,255,0.9);
+      border: 2px dashed var(--primary);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.9s ease;
+    }
+
+    .welcome-card h2 {
+      margin-top: 0;
+      font-size: 2rem;
+      color: var(--primary);
+      border-bottom: 3px solid var(--secondary);
+      display: inline-block;
+      padding-bottom: 0.4rem;
+    }
+
+    .welcome-card p {
+      max-width: 800px;
+      margin: 1rem auto 0;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .info-box {
+      background: rgba(255,255,255,0.92);
+      border: 2px dashed var(--primary);
+      border-radius: 16px;
+      padding: 1rem 1.2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .info-box h3 {
+      margin: 0 0 0.5rem;
+      color: var(--accent);
+      font-size: 1.05rem;
+    }
+
+    .info-box p {
+      margin: 0;
+      line-height: 1.7;
+      font-size: 0.97rem;
+    }
+
+    .requirements {
+      background: rgba(255,255,255,0.95);
+      border: 2px dashed var(--secondary);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+    }
+
+    .requirements h3 {
+      color: var(--primary);
+      margin-top: 0;
+      font-size: 1.4rem;
+      text-align: center;
+    }
+
+    .requirements ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      line-height: 1.9;
+    }
+
+    form {
+      background: rgba(255,255,255,0.95);
+      border: 2px dashed var(--primary);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      animation: fadeInUp 1s ease;
+    }
+
+    .form-title {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-title h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      margin: 0;
+      border-bottom: 3px solid var(--secondary);
+      display: inline-block;
+      padding-bottom: 0.4rem;
+    }
+
+    .form-title p {
+      margin-top: 0.8rem;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    fieldset {
+      border: 2px dashed #c9d2f0;
+      border-radius: 16px;
+      margin-bottom: 1.5rem;
+      padding: 1.2rem 1rem 1rem;
+      background: rgba(30,58,138,0.03);
+    }
+
+    legend {
+      padding: 0.3rem 0.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      background: #fff;
+      border-radius: 999px;
+      border: 2px solid var(--secondary);
+      font-size: 0.95rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    label {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1.8px solid #c9d2f0;
+      border-radius: 12px;
+      padding: 0.85rem 0.95rem;
+      font-size: 0.96rem;
+      background: #fff;
+      transition: 0.25s ease;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 4px rgba(255,193,7,0.18);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .checkbox-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      background: rgba(255,193,7,0.12);
+      border: 1px dashed var(--secondary);
+      border-radius: 14px;
+      padding: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .checkbox-wrap input {
+      width: auto;
+      margin-top: 0.2rem;
+      transform: scale(1.2);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1.8rem;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 0.95rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #2747a9;
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+      color: var(--primary);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      background: #ffcf33;
+    }
+
+    .notice {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.92rem;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .result-box {
+      display: none;
+      margin-top: 2rem;
+      padding: 1.4rem;
+      border-radius: 18px;
+      border: 2px dashed var(--accent);
+      background: rgba(30,86,49,0.08);
+      text-align: center;
+      color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    .result-box h3 {
+      margin-top: 0;
+      font-size: 1.4rem;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.95);
+      background: rgba(30,58,138,0.95);
+      border-top: 2px dashed var(--secondary);
+      margin-top: 3rem;
+    }
+
+    /* Floating WhatsApp */
+    .wa-float {
+      position: fixed;
+      right: 18px;
+      bottom: 24px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .wa-label {
+      background: #fff;
+      color: var(--primary);
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      border: 2px dashed var(--secondary);
+      animation: pulseBubble 2s infinite;
+    }
+
+    .wa-button {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: #25D366;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 1.8rem;
+      box-shadow: 0 10px 24px rgba(37,211,102,0.35);
+      transition: 0.25s ease;
+    }
+
+    .wa-button:hover {
+      transform: scale(1.08);
+    }
+
+    .small-text {
+      font-size: 0.84rem;
+      color: #666;
+      margin-top: 0.4rem;
+    }
+
+    .download-note {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.7;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(35px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glowTitle {
+      0%, 100% { color: #fff; text-shadow: 0 0 0 rgba(255,193,7,0); }
+      50% { color: var(--secondary); text-shadow: 0 0 16px rgba(255,193,7,0.4); }
+    }
+
+    @keyframes pulseBubble {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    @media (max-width: 900px) {
+      .grid, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .welcome-card h2,
+      .form-title h2 {
+        font-size: 1.6rem;
+      }
+
+      form {
+        padding: 1.2rem;
+      }
+
+      .wa-label {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>SMK MUHAMMADIYAH GUNUNGPUTRI</h1>
+    <h2>Penerimaan Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027</h2>
+    <div class="hero-badge">Pendaftaran Resmi Siswa Baru</div>
+  </header>
+
+  <div class="container">
+
+    <section class="welcome-card">
+      <h2>✨ Selamat Datang di Portal PPDB ✨</h2>
+      <p>
+        Silakan isi formulir pendaftaran dengan lengkap dan benar.
+        Setelah formulir dikirim, sistem akan membuat <strong>bukti pendaftaran</strong>
+        yang otomatis terdownload ke perangkat Anda.
+      </p>
+    </section>
+
+    <section class="info-grid">
+      <div class="info-box">
+        <h3>📍 Alamat Sekolah</h3>
+        <p>Jl. Kauman No.1 Kampung Parung Tanjung RT.03 RW.11, Desa Cicadas, Kecamatan Gunungputri, Kabupaten Bogor, Jawa Barat</p>
+      </div>
+      <div class="info-box">
+        <h3>🎓 Kompetensi Keahlian</h3>
+        <p>Desain Komunikasi Visual (DKV)</p>
+      </div>
+      <div class="info-box">
+        <h3>📞 Kontak Panitia</h3>
+        <p>WhatsApp: 081548711614</p>
+      </div>
+      <div class="info-box">
+        <h3>📧 Email Sekolah</h3>
+        <p>smkmuhammadiyahgp2016@gmail.com</p>
+      </div>
+    </section>
+
+    <section class="requirements">
+      <h3>Syarat Pendaftaran</h3>
+      <ul>
+        <li>Fotokopi Akte Kelahiran</li>
+        <li>Fotokopi Kartu Keluarga</li>
+        <li>Fotokopi Ijazah / Surat Keterangan Lulus</li>
+        <li>Fotokopi NISN</li>
+        <li>Pas Foto 3x4 dan 4x6</li>
+        <li>Bersedia mematuhi tata tertib sekolah</li>
+        <li>Orang tua/wali bersedia bekerja sama dengan pihak sekolah</li>
+      </ul>
+    </section>
+
+    <!-- FORM -->
+    <!-- 
+      GANTI action DI BAWAH DENGAN FORM SUBMIT / BACKEND ANDA
+      CARA CEPAT:
+      1. Buka https://formsubmit.co/
+      2. Ganti EMAIL TUJUAN DI action
+      3. Setelah deploy, akan ada email verifikasi
+    -->
+    <form id="ppdbForm"
+      action="https://formsubmit.co/smkmuhammadiyahgp2016@gmail.com"
+      method="POST"
+      enctype="multipart/form-data">
+
+      <!-- Hidden settings FormSubmit -->
+      <input type="hidden" name="_subject" value="PPDB Baru SMK Muhammadiyah Gunungputri 2026/2027">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_autoresponse" value="Terima kasih telah melakukan pendaftaran di SMK Muhammadiyah Gunungputri. Bukti pendaftaran Anda telah berhasil dibuat.">
+      <input type="hidden" name="_next" value="about:blank">
+
+      <div class="form-title">
+        <h2>Formulir Pendaftaran</h2>
+        <p>Isi data berikut sesuai dokumen resmi agar proses verifikasi berjalan lancar.</p>
+      </div>
+
+      <fieldset>
+        <legend>Data Sistem</legend>
+        <div class="grid">
+          <div class="form-group">
+            <label for="nomorPendaftaran">Nomor Pendaftaran</label>
+            <input type="text" id="nomorPendaftaran" name="Nomor Pendaftaran" readonly>
+          </div>
+          <div class="form-group">
+            <label for="tahunAjaran">Tahun Ajaran</label>
+            <input type="text" id="tahunAjaran" name="Tahun Ajaran" value="2026/2027" readonly>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Data Pribadi Siswa</legend>
+        <div class="grid">
+          <div class="form-group">
+            <label for="namaLengkap">Nama Lengkap</label>
+            <input type="text" id="namaLengkap" name="Nama Lengkap" required>
+          </div>
+          <div class="form-group">
+            <label for="namaPanggilan">Nama Panggilan</label>
+            <input type="text" id="namaPanggilan" name="Nama Panggilan">
+          </div>
+          <div class="form-group">
+            <label for="tempatLahir">Tempat Lahir</label>
+            <input type="text" id="tempatLahir" name="Tempat Lahir" required>
+          </div>
+          <div class="form-group">
+            <label for="tanggalLahir">Tanggal Lahir</label>
+            <input type="date" id="tanggalLahir" name="Tanggal Lahir" required>
+          </div>
+          <div class="form-group">
+            <label for="agama">Agama</label>
+            <select id="agama" name="Agama" required>
+              <option value="">Pilih Agama</option>
+              <option>Islam</option>
+              <option>Kristen</option>
+              <option>Katolik</option>
+              <option>Hindu</option>
+              <option>Buddha</option>
+              <option>Konghucu</option>
+              <option>Lainnya</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="kewarganegaraan">Kewarganegaraan</label>
+            <input type="text" id="kewarganegaraan" name="Kewarganegaraan" value="Indonesia">
+          </div>
+          <div class="form-group">
+            <label for="anakKe">Anak Ke</label>
+            <input type="number" id="anakKe" name="Anak Ke" min="1">
+          </div>
+          <div class="form-group">
+            <label for="jumlahSaudara">Jumlah Saudara Kandung</label>
+            <input type="number" id="jumlahSaudara" name="Jumlah Saudara Kandung" min="0">
+          </div>
+          <div class="form-group">
+            <label for="nik">NIK</label>
+            <input type="text" id="nik" name="NIK" maxlength="16" required>
+          </div>
+          <div class="form-group">
+            <label for="kk">Nomor Kartu Keluarga</label>
+            <input type="text" id="kk" name="Nomor KK" maxlength="16" required>
+          </div>
+          <div class="form-group full">
+            <label for="bahasaSehari">Bahasa Sehari-hari</label>
+            <input type="text" id="bahasaSehari" name="Bahasa Sehari-hari">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Data Orang Tua / Wali</legend>
+        <div class="grid">
+          <div class="form-group">
+            <label for="namaAyah">Nama Ayah</label>
+            <input type="text" id="namaAyah" name="Nama Ayah" required>
+          </div>
+          <div class="form-group">
+            <label for="ttlAyah">Tempat, Tanggal Lahir Ayah</label>
+            <input type="text" id="ttlAyah" name="TTL Ayah">
+          </div>
+          <div class="form-group">
+            <label for="pendidikanAyah">Pendidikan Terakhir Ayah</label>
+            <input type="text" id="pendidikanAyah" name="Pendidikan Ayah">
+          </div>
+          <div class="form-group">
+            <label for="pekerjaanAyah">Pekerjaan Ayah</label>
+            <input type="text" id="pekerjaanAyah" name="Pekerjaan Ayah">
+          </div>
+          <div class="form-group">
+            <label for="penghasilanAyah">Penghasilan Ayah / Bulan</label>
+            <input type="text" id="penghasilanAyah" name="Penghasilan Ayah">
+          </div>
+          <div class="form-group">
+            <label for="hpAyah">No. HP Ayah</label>
+            <input type="tel" id="hpAyah" name="HP Ayah">
+          </div>
+
+          <div class="form-group">
+            <label for="namaIbu">Nama Ibu</label>
+            <input type="text" id="namaIbu" name="Nama Ibu" required>
+          </div>
+          <div class="form-group">
+            <label for="ttlIbu">Tempat, Tanggal Lahir Ibu</label>
+            <input type="text" id="ttlIbu" name="TTL Ibu">
+          </div>
+          <div class="form-group">
+            <label for="pendidikanIbu">Pendidikan Terakhir Ibu</label>
+            <input type="text" id="pendidikanIbu" name="Pendidikan Ibu">
+          </div>
+          <div class="form-group">
+            <label for="pekerjaanIbu">Pekerjaan Ibu</label>
+            <input type="text" id="pekerjaanIbu" name="Pekerjaan Ibu">
+          </div>
+          <div class="form-group">
+            <label for="penghasilanIbu">Penghasilan Ibu / Bulan</label>
+            <input type="text" id="penghasilanIbu" name="Penghasilan Ibu">
+          </div>
+          <div class="form-group">
+            <label for="hpIbu">No. HP Ibu</label>
+            <input type="tel" id="hpIbu" name="HP Ibu">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Alamat & Tempat Tinggal</legend>
+        <div class="grid">
+          <div class="form-group full">
+            <label for="alamatLengkap">Alamat Lengkap</label>
+            <textarea id="alamatLengkap" name="Alamat Lengkap" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="tinggalDengan">Tinggal Dengan</label>
+            <input type="text" id="tinggalDengan" name="Tinggal Dengan">
+          </div>
+          <div class="form-group">
+            <label for="jarakRumah">Jarak Rumah ke Sekolah</label>
+            <input type="text" id="jarakRumah" name="Jarak Rumah ke Sekolah">
+          </div>
+          <div class="form-group">
+            <label for="transportasi">Ke Sekolah Menggunakan</label>
+            <input type="text" id="transportasi" name="Transportasi ke Sekolah">
+          </div>
+          <div class="form-group">
+            <label for="asalSekolah">Asal Sekolah</label>
+            <input type="text" id="asalSekolah" name="Asal Sekolah" required>
+          </div>
+          <div class="form-group full">
+            <label for="alamatSekolahAsal">Alamat Sekolah Asal</label>
+            <textarea id="alamatSekolahAsal" name="Alamat Sekolah Asal"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Kesehatan & Minat</legend>
+        <div class="grid-3">
+          <div class="form-group">
+            <label for="tinggiBadan">Tinggi Badan (cm)</label>
+            <input type="number" id="tinggiBadan" name="Tinggi Badan">
+          </div>
+          <div class="form-group">
+            <label for="beratBadan">Berat Badan (kg)</label>
+            <input type="number" id="beratBadan" name="Berat Badan">
+          </div>
+          <div class="form-group">
+            <label for="golDarah">Golongan Darah</label>
+            <select id="golDarah" name="Golongan Darah">
+              <option value="">Pilih</option>
+              <option>A</option>
+              <option>B</option>
+              <option>AB</option>
+              <option>O</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="form-group">
+            <label for="riwayatPenyakit">Riwayat Penyakit</label>
+            <textarea id="riwayatPenyakit" name="Riwayat Penyakit"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="kelainanJasmani">Kelainan Jasmani / Lainnya</label>
+            <textarea id="kelainanJasmani" name="Kelainan Jasmani"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="kesenian">Kesenian</label>
+            <input type="text" id="kesenian" name="Kesenian">
+          </div>
+          <div class="form-group">
+            <label for="olahraga">Olahraga</label>
+            <input type="text" id="olahraga" name="Olahraga">
+          </div>
+          <div class="form-group">
+            <label for="organisasi">Organisasi</label>
+            <input type="text" id="organisasi" name="Organisasi">
+          </div>
+          <div class="form-group">
+            <label for="lainnya">Lain-lain</label>
+            <input type="text" id="lainnya" name="Lain-lain">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Jurusan Pilihan & Upload Berkas</legend>
+        <div class="grid">
+          <div class="form-group">
+            <label for="jurusan">Jurusan Pilihan</label>
+            <select id="jurusan" name="Jurusan Pilihan" required>
+              <option value="">Pilih Jurusan</option>
+              <option>Desain Komunikasi Visual (DKV)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="namaWali">Nama Orang Tua / Wali</label>
+            <input type="text" id="namaWali" name="Nama Orang Tua/Wali" required>
+          </div>
+          <div class="form-group">
+            <label for="fileAkte">Upload Akte Kelahiran</label>
+            <input type="file" id="fileAkte" name="Akte Kelahiran" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+          <div class="form-group">
+            <label for="fileKK">Upload Kartu Keluarga</label>
+            <input type="file" id="fileKK" name="Kartu Keluarga" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+          <div class="form-group">
+            <label for="fileIjazah">Upload Ijazah / SKL</label>
+            <input type="file" id="fileIjazah" name="Ijazah / SKL" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+          <div class="form-group">
+            <label for="fileNISN">Upload NISN</label>
+            <input type="file" id="fileNISN" name="NISN" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Pernyataan</legend>
+        <div class="checkbox-wrap">
+          <input type="checkbox" id="pernyataan" name="Pernyataan" required>
+          <label for="pernyataan" style="font-weight:600; color:#333;">
+            Saya menyatakan bahwa seluruh data yang saya isi adalah benar.
+            Apabila di kemudian hari terdapat data yang tidak benar/palsu,
+            maka saya bersedia menerima konsekuensi sesuai ketentuan yang berlaku
+            di SMK Muhammadiyah Gunungputri.
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="action-buttons">
+        <button type="submit" class="btn-primary">Kirim & Download Bukti Pendaftaran</button>
+        <button type="reset" class="btn-secondary">Reset Form</button>
+      </div>
+
+      <p class="notice">
+        Setelah menekan tombol kirim, data akan diproses dan bukti pendaftaran akan otomatis diunduh.
+      </p>
+
+      <div id="resultBox" class="result-box">
+        <h3>✅ Pendaftaran Berhasil Diproses</h3>
+        <p id="resultText"></p>
+        <div class="download-note">
+          File bukti pendaftaran telah diunduh otomatis ke perangkat Anda.
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <a
+    class="wa-float"
+    href="https://wa.me/6281548711614?text=Assalamu%27alaikum%20saya%20ingin%20bertanya%20tentang%20PPDB%20SMK%20Muhammadiyah%20Gunungputri%202026%2F2027"
+    target="_blank"
+    aria-label="Hubungi via WhatsApp"
+  >
+    <span class="wa-label">Hubungi Panitia PPDB</span>
+    <span class="wa-button">💬</span>
+  </a>
+
+  <div class="footer">
+    © <span id="yearNow"></span> SMK Muhammadiyah Gunungputri — PPDB Tahun Ajaran 2026/2027
+  </div>
+
+  <script>
+    const form = document.getElementById("ppdbForm");
+    const nomorInput = document.getElementById("nomorPendaftaran");
+    const resultBox = document.getElementById("resultBox");
+    const resultText = document.getElementById("resultText");
+    const yearNow = document.getElementById("yearNow");
+
+    yearNow.textContent = new Date().getFullYear();
+
+    function generateRegistrationNumber() {
+      const random = Math.floor(100000 + Math.random() * 900000);
+      return `PPDB-2026-${random}`;
+    }
+
+    nomorInput.value = generateRegistrationNumber();
+
+    function getFormDataObject(formElement) {
+      const formData = new FormData(formElement);
+      const data = {};
+      for (const [key, value] of formData.entries()) {
+        if (value instanceof File) {
+          if (value.name) {
+            data[key] = value.name;
+          }
+        } else {
+          data[key] = value;
+        }
+      }
+      return data;
+    }
+
+    function buildTextProof(data) {
+      return `
+========================================
+BUKTI PENDAFTARAN PPDB
+SMK MUHAMMADIYAH GUNUNGPUTRI
+TAHUN AJARAN 2026/2027
+========================================
+
+Nomor Pendaftaran : ${data["Nomor Pendaftaran"] || "-"}
+Tanggal Cetak     : ${new Date().toLocaleString("id-ID")}
+
+=========================
+DATA CALON SISWA
+=========================
+Nama Lengkap      : ${data["Nama Lengkap"] || "-"}
+Nama Panggilan    : ${data["Nama Panggilan"] || "-"}
+Tempat Lahir      : ${data["Tempat Lahir"] || "-"}
+Tanggal Lahir     : ${data["Tanggal Lahir"] || "-"}
+Agama             : ${data["Agama"] || "-"}
+Kewarganegaraan   : ${data["Kewarganegaraan"] || "-"}
+NIK               : ${data["NIK"] || "-"}
+Nomor KK          : ${data["Nomor KK"] || "-"}
+Anak Ke           : ${data["Anak Ke"] || "-"}
+Jumlah Saudara    : ${data["Jumlah Saudara Kandung"] || "-"}
+Bahasa Sehari-hari: ${data["Bahasa Sehari-hari"] || "-"}
+
+=========================
+DATA ORANG TUA
+=========================
+Nama Ayah         : ${data["Nama Ayah"] || "-"}
+TTL Ayah          : ${data["TTL Ayah"] || "-"}
+Pendidikan Ayah   : ${data["Pendidikan Ayah"] || "-"}
+Pekerjaan Ayah    : ${data["Pekerjaan Ayah"] || "-"}
+Penghasilan Ayah  : ${data["Penghasilan Ayah"] || "-"}
+HP Ayah           : ${data["HP Ayah"] || "-"}
+
+Nama Ibu          : ${data["Nama Ibu"] || "-"}
+TTL Ibu           : ${data["TTL Ibu"] || "-"}
+Pendidikan Ibu    : ${data["Pendidikan Ibu"] || "-"}
+Pekerjaan Ibu     : ${data["Pekerjaan Ibu"] || "-"}
+Penghasilan Ibu   : ${data["Penghasilan Ibu"] || "-"}
+HP Ibu            : ${data["HP Ibu"] || "-"}
+
+=========================
+ALAMAT & SEKOLAH ASAL
+=========================
+Alamat Lengkap    : ${data["Alamat Lengkap"] || "-"}
+Tinggal Dengan    : ${data["Tinggal Dengan"] || "-"}
+Jarak ke Sekolah  : ${data["Jarak Rumah ke Sekolah"] || "-"}
+Transportasi      : ${data["Transportasi ke Sekolah"] || "-"}
+Asal Sekolah      : ${data["Asal Sekolah"] || "-"}
+Alamat Sekolah    : ${data["Alamat Sekolah Asal"] || "-"}
+
+=========================
+KESEHATAN & MINAT
+=========================
+Tinggi Badan      : ${data["Tinggi Badan"] || "-"} cm
+Berat Badan       : ${data["Berat Badan"] || "-"} kg
+Golongan Darah    : ${data["Golongan Darah"] || "-"}
+Riwayat Penyakit  : ${data["Riwayat Penyakit"] || "-"}
+Kelainan Jasmani  : ${data["Kelainan Jasmani"] || "-"}
+Kesenian          : ${data["Kesenian"] || "-"}
+Olahraga          : ${data["Olahraga"] || "-"}
+Organisasi        : ${data["Organisasi"] || "-"}
+Lain-lain         : ${data["Lain-lain"] || "-"}
+
+=========================
+PILIHAN PENDAFTARAN
+=========================
+Jurusan Pilihan   : ${data["Jurusan Pilihan"] || "-"}
+Nama Wali         : ${data["Nama Orang Tua/Wali"] || "-"}
+
+=========================
+UPLOAD BERKAS
+=========================
+Akte Kelahiran    : ${data["Akte Kelahiran"] || "-"}
+Kartu Keluarga    : ${data["Kartu Keluarga"] || "-"}
+Ijazah / SKL      : ${data["Ijazah / SKL"] || "-"}
+NISN              : ${data["NISN"] || "-"}
+
+========================================
+STATUS: FORMULIR TELAH DIISI
+========================================
+
+Terima kasih telah mendaftar di
+SMK Muhammadiyah Gunungputri.
+      `.trim();
+    }
+
+    function downloadProof(data) {
+      const text = buildTextProof(data);
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${data["Nomor Pendaftaran"] || "bukti-pendaftaran"}.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      URL.revokeObjectURL(url);
+    }
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const data = getFormDataObject(form);
+
+      // 1) Download bukti otomatis
+      downloadProof(data);
+
+      // 2) Tampilkan notifikasi sukses
+      resultText.innerHTML = `
+        Nomor Pendaftaran Anda adalah <strong>${data["Nomor Pendaftaran"]}</strong>.<br>
+        Simpan bukti pendaftaran untuk proses verifikasi administrasi.
+      `;
+      resultBox.style.display = "block";
+      resultBox.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      // 3) Kirim data ke email via FormSubmit
+      const formData = new FormData(form);
+
+      try {
+        await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            "Accept": "application/json"
+          }
+        });
+      } catch (error) {
+        console.error("Gagal kirim email:", error);
+      }
+
+      // 4) Siapkan nomor baru jika ingin input pendaftar berikutnya
+      setTimeout(() => {
+        nomorInput.value = generateRegistrationNumber();
+      }, 1200);
+    });
+
+    form.addEventListener("reset", function() {
+      setTimeout(() => {
+        nomorInput.value = generateRegistrationNumber();
+        resultBox.style.display = "none";
+      }, 100);
+    });
+  </script>
+
+</body>
+</html>
