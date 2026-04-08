@@ -40,7 +40,7 @@
       text-decoration: none;
     }
 
-break-text {
+.break-text {
   overflow-wrap: anywhere;
   word-break: break-word;
 }
@@ -144,32 +144,43 @@ break-text {
     }
 
     .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-      margin: 2rem 0;
-    }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.2rem;
+  margin: 2rem 0;
+  align-items: stretch;
+}
 
-    .info-box {
-      background: rgba(255,255,255,0.92);
-      border: 2px dashed var(--primary);
-      border-radius: 16px;
-      padding: 1rem 1.2rem;
-      box-shadow: var(--shadow);
-    }
+.info-box {
+  background: rgba(255,255,255,0.95);
+  border: 2px dashed var(--primary);
+  border-radius: 18px;
+  padding: 1.4rem 1.3rem;
+  box-shadow: var(--shadow);
+  min-width: 0; /* penting agar isi bisa wrap dengan benar */
+  overflow: hidden;
+}
 
-    .info-box h3 {
-      margin: 0 0 0.5rem;
-      color: var(--accent);
-      font-size: 1.05rem;
-    }
+.info-box h3 {
+  margin: 0 0 0.8rem;
+  color: var(--accent);
+  font-size: 1.15rem;
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  word-break: break-word;
+}
 
-    .info-box p {
-      margin: 0;
-      line-height: 1.7;
-      font-size: 0.97rem;
-    }
-
+.info-box p {
+  margin: 0;
+  line-height: 1.9;
+  font-size: 1rem;
+  color: #333;
+  overflow-wrap: anywhere;   /* sangat penting */
+  word-break: break-word;    /* backup */
+  hyphens: auto;
+}
     .requirements {
       background: rgba(255,255,255,0.95);
       border: 2px dashed var(--secondary);
