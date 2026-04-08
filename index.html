@@ -445,6 +445,18 @@
       word-break: break-word;
     }
 
+    .result-box.error {
+  border: 2px dashed var(--danger);
+  background: rgba(198,40,40,0.08);
+  color: var(--danger);
+}
+
+.result-box.success {
+  border: 2px dashed var(--success);
+  background: rgba(46,125,50,0.08);
+  color: var(--success);
+}
+
     .footer {
       text-align: center;
       padding: 1rem;
@@ -1065,7 +1077,7 @@
           <label for="pernyataan">
             Saya menyatakan bahwa seluruh data yang saya isi adalah benar.
             Apabila di kemudian hari terdapat data yang tidak benar/palsu,
-            maka saya bersedia menerima konsekuensi sesuai ketentuan yang berlaku
+            maka saya bersedia menerima konsekuensi sesuai UU, Perpu, PP, Perpres, Perda dan ketentuan yang berlaku
             di SMK Muhammadiyah Gunungputri.
           </label>
         </div>
@@ -1081,11 +1093,10 @@
       </p>
 
       <div id="resultBox" class="result-box">
-        <h3>✅ Pendaftaran Berhasil Diproses</h3>
-        <p id="resultText"></p>
-        <div class="download-note">
-          File bukti pendaftaran telah diunduh otomatis ke perangkat Anda.
-        </div>
+  <h3 id="resultTitle">✅ Pendaftaran Berhasil Diproses</h3>
+  <p id="resultText"></p>
+  <div id="resultExtra" class="download-note"></div>
+</div>
       </div>
     </form>
   </div>
@@ -1105,42 +1116,45 @@
   </div>
 
   <script>
-    const form = document.getElementById("ppdbForm");
-    const nomorInput = document.getElementById("nomorPendaftaran");
-    const resultBox = document.getElementById("resultBox");
-    const resultText = document.getElementById("resultText");
-    const yearNow = document.getElementById("yearNow");
+  const form = document.getElementById("ppdbForm");
+  const nomorInput = document.getElementById("nomorPendaftaran");
+  const resultBox = document.getElementById("resultBox");
+  const resultTitle = document.getElementById("resultTitle");
+  const resultText = document.getElementById("resultText");
+  const resultExtra = document.getElementById("resultExtra");
+  const submitButton = form.querySelector('button[type="submit"]');
+  const yearNow = document.getElementById("yearNow");
 
-    yearNow.textContent = new Date().getFullYear();
+  yearNow.textContent = new Date().getFullYear();
 
-    function generateRegistrationNumber() {
-      const random = Math.floor(100000 + Math.random() * 900000);
-      return `PPDB-2026-${random}`;
-    }
+  function generateRegistrationNumber() {
+    const random = Math.floor(100000 + Math.random() * 900000);
+    return `PPDB-2026-${random}`;
+  }
 
-    nomorInput.value = generateRegistrationNumber();
+  nomorInput.value = generateRegistrationNumber();
 
-    function getFormDataObject(formElement) {
-      const formData = new FormData(formElement);
-      const data = {};
-      for (const [key, value] of formData.entries()) {
-        if (value instanceof File) {
-          if (value.name) {
-            data[key] = value.name;
-          }
-        } else {
-          data[key] = value;
+  function getFormDataObject(formElement) {
+    const formData = new FormData(formElement);
+    const data = {};
+    for (const [key, value] of formData.entries()) {
+      if (value instanceof File) {
+        if (value.name) {
+          data[key] = value.name;
         }
+      } else {
+        data[key] = value;
       }
-      return data;
     }
+    return data;
+  }
 
-    function safe(val) {
-      return val && String(val).trim() !== "" ? val : "-";
-    }
+  function safe(val) {
+    return val && String(val).trim() !== "" ? val : "-";
+  }
 
-    function buildTextProof(data) {
-      return `
+  function buildTextProof(data) {
+    return `
 ========================================
 BUKTI PENDAFTARAN PPDB
 SMK MUHAMMADIYAH GUNUNGPUTRI
@@ -1261,119 +1275,113 @@ STATUS: FORMULIR TELAH DIISI
 
 Terima kasih telah mendaftar di
 SMK Muhammadiyah Gunungputri.
-      `.trim();
+    `.trim();
+  }
+
+  function downloadProof(data) {
+    const text = buildTextProof(data);
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${data["Nomor Pendaftaran"] || "bukti-pendaftaran"}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+  }
+
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
     }
 
-    function downloadProof(data) {
-      const text = buildTextProof(data);
-      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
+    submitButton.disabled = true;
+    submitButton.textContent = "Mengirim data...";
 
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `${data["Nomor Pendaftaran"] || "bukti-pendaftaran"}.txt`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+    const data = getFormDataObject(form);
+    const formData = new FormData(form);
 
-      URL.revokeObjectURL(url);
-    }
+    // Download bukti dulu
+    downloadProof(data);
 
-    form.addEventListener("submit", async function(e) {
-      e.preventDefault();
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Accept": "application/json"
+        }
+      });
 
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
+      if (!response.ok) {
+        throw new Error("Gagal mengirim data");
       }
 
-      const data = getFormDataObject(form);
+      resultBox.classList.remove("error");
+      resultBox.classList.add("success");
 
-      // 1. Download bukti otomatis
-      downloadProof(data);
-
-      // 2. Tampilkan notifikasi sukses
+      resultTitle.innerHTML = "🎉 Pendaftaran Berhasil Dikirim!";
       resultText.innerHTML = `
-        Nomor Pendaftaran Anda adalah <strong>${data["Nomor Pendaftaran"]}</strong>.<br>
-        Simpan bukti pendaftaran untuk proses verifikasi administrasi.
+        Selamat <strong>${safe(data["Nama Lengkap"])}</strong>, data Anda telah berhasil dikirim.<br>
+        Nomor Pendaftaran Anda adalah <strong>${safe(data["Nomor Pendaftaran"])}</strong>.
       `;
+      resultExtra.innerHTML = `
+        🌟 <strong>Informasi Menarik Setelah Pendaftaran:</strong><br><br>
+        ✅ Bukti pendaftaran sudah otomatis terunduh ke perangkat Anda.<br>
+        📌 Nomor pendaftaran ini akan digunakan saat verifikasi administrasi.<br>
+        📲 Pastikan nomor WhatsApp siswa / orang tua tetap aktif agar mudah dihubungi panitia.<br>
+        🗂️ Siapkan seluruh berkas asli untuk proses pengecekan saat diminta.<br><br>
+        💡 <strong>Tips Cerdas:</strong> Screenshot halaman ini dan simpan file bukti pendaftaran di Google Drive / WhatsApp keluarga agar tidak hilang.
+      `;
+
       resultBox.style.display = "block";
       resultBox.scrollIntoView({ behavior: "smooth", block: "center" });
 
-      // 3. Kirim data ke email via FormSubmit
-      const formData = new FormData(form);
+      form.reset();
 
-      try {
-        await fetch(form.action, {
-          method: "POST",
-          body: formData,
-          headers: {
-            "Accept": "application/json"
-          }
-        });
+      setTimeout(() => {
+        nomorInput.value = generateRegistrationNumber();
+      }, 500);
 
-         if (!response.ok) {
-          throw new Error("Gagal mengirim data");
-        }
+    } catch (error) {
+      console.error("Gagal kirim email:", error);
 
-        resultBox.classList.remove("error");
-        resultTitle.innerHTML = "🎉 Pendaftaran Berhasil Dikirim!";
-        resultText.innerHTML = `
-          Selamat <strong>${data["Nama Lengkap"]}</strong>, data Anda telah berhasil dikirim.<br>
-          Nomor Pendaftaran Anda adalah <strong>${data["Nomor Pendaftaran"]}</strong>.
-        `;
-        resultExtra.innerHTML = `
-          🌟 <strong>Langkah Selanjutnya:</strong><br>
-          1. Simpan file bukti pendaftaran Anda.<br>
-          2. Pastikan nomor WhatsApp tetap aktif untuk dihubungi panitia.<br>
-          3. Siapkan seluruh berkas asli untuk proses verifikasi.<br><br>
-          📌 <strong>Tips:</strong> Screenshot halaman ini dan kirim ke orang tua agar data pendaftaran tersimpan dengan aman.
-        `;
-        resultBox.style.display = "block";
-        resultBox.scrollIntoView({ behavior: "smooth", block: "center" });
-
-        form.reset();
-        setTimeout(() => {
-          nomorInput.value = generateRegistrationNumber();
-        }, 500);
-
-      } catch (error) {
-        console.error("Gagal kirim email:", error);
-      }
-
+      resultBox.classList.remove("success");
       resultBox.classList.add("error");
-        resultTitle.innerHTML = "⚠️ Pendaftaran Belum Terkirim Sempurna";
-        resultText.innerHTML = `
-          Bukti pendaftaran Anda <strong>sudah berhasil diunduh</strong>, namun data belum berhasil dikirim ke email panitia.
-        `;
-        resultExtra.innerHTML = `
-          🔔 <strong>Yang harus Anda lakukan:</strong><br>
-          1. Periksa koneksi internet Anda.<br>
-          2. Klik tombol <strong>Kirim</strong> kembali beberapa saat lagi.<br>
-          3. Jika masih gagal, hubungi panitia melalui WhatsApp yang tersedia di pojok kanan bawah.<br><br>
-          💡 Jangan khawatir, file bukti pendaftaran Anda sudah tersimpan di perangkat.
-        `;
-        resultBox.style.display = "block";
-        resultBox.scrollIntoView({ behavior: "smooth", block: "center" });
-      } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = "Kirim & Download Bukti Pendaftaran";
-      }
-    });
 
-      // 4. Siapkan nomor baru
-      setTimeout(() => {
-        nomorInput.value = generateRegistrationNumber();
-      }, 1200);
-    });
+      resultTitle.innerHTML = "⚠️ Pendaftaran Belum Terkirim Sempurna";
+      resultText.innerHTML = `
+        Bukti pendaftaran Anda <strong>sudah berhasil diunduh</strong>, namun data belum berhasil dikirim ke email panitia.
+      `;
+      resultExtra.innerHTML = `
+        🔔 <strong>Yang harus Anda lakukan:</strong><br><br>
+        1. Periksa koneksi internet Anda.<br>
+        2. Klik tombol <strong>Kirim & Download Bukti Pendaftaran</strong> kembali beberapa saat lagi.<br>
+        3. Jika masih gagal, hubungi panitia melalui tombol WhatsApp di pojok kanan bawah.<br><br>
+        💡 <strong>Info Penting:</strong> File bukti pendaftaran Anda sudah tersimpan di perangkat, jadi data utama Anda tidak hilang.
+      `;
 
-    form.addEventListener("reset", function() {
-      setTimeout(() => {
-        nomorInput.value = generateRegistrationNumber();
-        resultBox.style.display = "none";
-      }, 100);
-    });
-  </script>
+      resultBox.style.display = "block";
+      resultBox.scrollIntoView({ behavior: "smooth", block: "center" });
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "Kirim & Download Bukti Pendaftaran";
+    }
+  });
 
+  form.addEventListener("reset", function() {
+    setTimeout(() => {
+      nomorInput.value = generateRegistrationNumber();
+      resultBox.style.display = "none";
+      resultBox.classList.remove("error", "success");
+    }, 100);
+  });
+</script>
 </body>
 </html>
