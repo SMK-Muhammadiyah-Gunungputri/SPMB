@@ -15,6 +15,8 @@
       --soft-blue: rgba(30,58,138,0.05);
       --shadow: 0 8px 24px rgba(0,0,0,0.08);
       --radius: 18px;
+      --danger: #c62828;
+      --success: #2e7d32;
     }
 
     * {
@@ -40,11 +42,17 @@
       text-decoration: none;
     }
 
-.break-text {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-    
+    .break-text {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      hyphens: auto;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
     header {
       background: linear-gradient(135deg, var(--primary), #2747a9);
       color: white;
@@ -86,18 +94,21 @@
 
     header h1 {
       margin: 0;
-      font-size: 2.6rem;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
       font-weight: 900;
       text-transform: uppercase;
       text-shadow: 2px 2px rgba(0,0,0,0.12);
       animation: glowTitle 2.5s infinite;
+      line-height: 1.2;
     }
 
     header h2 {
-      margin: 0.7rem 0 0;
-      font-size: 1.1rem;
+      margin: 0.7rem auto 0;
+      font-size: clamp(1rem, 2vw, 1.15rem);
       font-weight: 500;
       font-style: italic;
+      max-width: 900px;
+      line-height: 1.7;
     }
 
     .hero-badge {
@@ -112,75 +123,84 @@
     }
 
     .container {
-      width: min(1150px, 92%);
+      width: min(1180px, 92%);
       margin: 2rem auto 6rem;
     }
 
     .welcome-card {
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.92);
       border: 2px dashed var(--primary);
       border-radius: var(--radius);
-      padding: 2rem;
+      padding: clamp(1.4rem, 3vw, 2rem);
       text-align: center;
       box-shadow: var(--shadow);
       margin-bottom: 2rem;
       animation: fadeInUp 0.9s ease;
+      overflow: hidden;
     }
 
     .welcome-card h2 {
       margin-top: 0;
-      font-size: 2rem;
+      font-size: clamp(1.5rem, 3vw, 2rem);
       color: var(--primary);
       border-bottom: 3px solid var(--secondary);
       display: inline-block;
       padding-bottom: 0.4rem;
+      line-height: 1.4;
     }
 
     .welcome-card p {
-      max-width: 800px;
+      max-width: 860px;
       margin: 1rem auto 0;
       font-size: 1.05rem;
-      line-height: 1.8;
+      line-height: 1.9;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 1.2rem;
-  margin: 2rem 0;
-  align-items: stretch;
-}
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.2rem;
+      margin: 2rem 0;
+      align-items: stretch;
+    }
 
-.info-box {
-  background: rgba(255,255,255,0.95);
-  border: 2px dashed var(--primary);
-  border-radius: 18px;
-  padding: 1.4rem 1.3rem;
-  box-shadow: var(--shadow);
-  min-width: 0; /* penting agar isi bisa wrap dengan benar */
-  overflow: hidden;
-}
+    .info-box {
+      background: rgba(255,255,255,0.95);
+      border: 2px dashed var(--primary);
+      border-radius: 18px;
+      padding: 1.4rem 1.3rem;
+      box-shadow: var(--shadow);
+      min-width: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
 
-.info-box h3 {
-  margin: 0 0 0.8rem;
-  color: var(--accent);
-  font-size: 1.15rem;
-  line-height: 1.4;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.45rem;
-  word-break: break-word;
-}
+    .info-box h3 {
+      margin: 0 0 0.8rem;
+      color: var(--accent);
+      font-size: 1.15rem;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.45rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
 
-.info-box p {
-  margin: 0;
-  line-height: 1.9;
-  font-size: 1rem;
-  color: #333;
-  overflow-wrap: anywhere;   /* sangat penting */
-  word-break: break-word;    /* backup */
-  hyphens: auto;
-}
+    .info-box p {
+      margin: 0;
+      line-height: 1.9;
+      font-size: 1rem;
+      color: #333;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      hyphens: auto;
+    }
+
     .requirements {
       background: rgba(255,255,255,0.95);
       border: 2px dashed var(--secondary);
@@ -188,28 +208,33 @@
       padding: 1.5rem;
       box-shadow: var(--shadow);
       margin-bottom: 2rem;
+      overflow: hidden;
     }
 
     .requirements h3 {
       color: var(--primary);
       margin-top: 0;
-      font-size: 1.4rem;
+      font-size: 1.45rem;
       text-align: center;
+      line-height: 1.4;
     }
 
     .requirements ul {
       margin: 0;
-      padding-left: 1.2rem;
-      line-height: 1.9;
+      padding-left: 1.3rem;
+      line-height: 2;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     form {
       background: rgba(255,255,255,0.95);
       border: 2px dashed var(--primary);
       border-radius: 20px;
-      padding: 2rem;
+      padding: clamp(1.2rem, 3vw, 2rem);
       box-shadow: var(--shadow);
       animation: fadeInUp 1s ease;
+      overflow: hidden;
     }
 
     .form-title {
@@ -219,17 +244,22 @@
 
     .form-title h2 {
       color: var(--primary);
-      font-size: 2rem;
+      font-size: clamp(1.5rem, 3vw, 2rem);
       margin: 0;
       border-bottom: 3px solid var(--secondary);
       display: inline-block;
       padding-bottom: 0.4rem;
+      line-height: 1.4;
     }
 
     .form-title p {
       margin-top: 0.8rem;
       color: #555;
-      line-height: 1.7;
+      line-height: 1.8;
+      max-width: 820px;
+      margin-inline: auto;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     fieldset {
@@ -238,6 +268,8 @@
       margin-bottom: 1.5rem;
       padding: 1.2rem 1rem 1rem;
       background: rgba(30,58,138,0.03);
+      min-width: 0;
+      overflow: hidden;
     }
 
     legend {
@@ -248,6 +280,10 @@
       border-radius: 999px;
       border: 2px solid var(--secondary);
       font-size: 0.95rem;
+      line-height: 1.4;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .grid {
@@ -270,12 +306,16 @@
       display: flex;
       flex-direction: column;
       gap: 0.45rem;
+      min-width: 0;
     }
 
     label {
       font-weight: 700;
       color: var(--primary);
       font-size: 0.95rem;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     input, select, textarea {
@@ -287,6 +327,8 @@
       background: #fff;
       transition: 0.25s ease;
       outline: none;
+      min-width: 0;
+      max-width: 100%;
     }
 
     input:focus, select:focus, textarea:focus {
@@ -297,6 +339,13 @@
     textarea {
       resize: vertical;
       min-height: 110px;
+    }
+
+    .hint {
+      font-size: 0.82rem;
+      color: #666;
+      line-height: 1.6;
+      margin-top: 0.15rem;
     }
 
     .checkbox-wrap {
@@ -314,6 +363,12 @@
       width: auto;
       margin-top: 0.2rem;
       transform: scale(1.2);
+      flex-shrink: 0;
+    }
+
+    .checkbox-wrap label {
+      color: #333 !important;
+      font-weight: 600;
     }
 
     .action-buttons {
@@ -361,6 +416,8 @@
       font-size: 0.92rem;
       color: #666;
       line-height: 1.7;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .result-box {
@@ -373,11 +430,19 @@
       text-align: center;
       color: var(--accent);
       box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
     .result-box h3 {
       margin-top: 0;
       font-size: 1.4rem;
+      line-height: 1.5;
+    }
+
+    .result-box p {
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .footer {
@@ -388,9 +453,11 @@
       background: rgba(30,58,138,0.95);
       border-top: 2px dashed var(--secondary);
       margin-top: 3rem;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
-    /* Floating WhatsApp */
     .wa-float {
       position: fixed;
       right: 18px;
@@ -411,6 +478,7 @@
       box-shadow: var(--shadow);
       border: 2px dashed var(--secondary);
       animation: pulseBubble 2s infinite;
+      white-space: nowrap;
     }
 
     .wa-button {
@@ -424,6 +492,7 @@
       font-size: 1.8rem;
       box-shadow: 0 10px 24px rgba(37,211,102,0.35);
       transition: 0.25s ease;
+      flex-shrink: 0;
     }
 
     .wa-button:hover {
@@ -434,6 +503,7 @@
       font-size: 0.84rem;
       color: #666;
       margin-top: 0.4rem;
+      line-height: 1.7;
     }
 
     .download-note {
@@ -441,6 +511,8 @@
       font-size: 0.95rem;
       color: #444;
       line-height: 1.7;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     @keyframes fadeInDown {
@@ -464,50 +536,53 @@
     }
 
     @media (max-width: 1200px) {
-  .info-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .info-box {
-    padding: 1.2rem 1rem;
-  }
-
-  .info-box h3 {
-    font-size: 1.05rem;
-  }
-
-  .info-box p {
-    font-size: 0.96rem;
-    line-height: 1.8;
-  }
-}
+      .info-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
 
     @media (max-width: 900px) {
       .grid, .grid-3 {
         grid-template-columns: 1fr;
       }
 
-      header h1 {
-        font-size: 2rem;
-      }
-
-      .welcome-card h2,
-      .form-title h2 {
-        font-size: 1.6rem;
-      }
-
-      form {
-        padding: 1.2rem;
+      .info-grid {
+        grid-template-columns: 1fr;
       }
 
       .wa-label {
         display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .info-box {
+        padding: 1.2rem 1rem;
+      }
+
+      .info-box h3 {
+        font-size: 1.05rem;
+      }
+
+      .info-box p {
+        font-size: 0.96rem;
+        line-height: 1.8;
+      }
+
+      form {
+        padding: 1rem;
+      }
+
+      fieldset {
+        padding: 1rem 0.9rem 0.9rem;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      .action-buttons {
+        flex-direction: column;
       }
     }
   </style>
@@ -563,20 +638,11 @@
       </ul>
     </section>
 
-    <!-- FORM -->
-    <!-- 
-      GANTI action DI BAWAH DENGAN FORM SUBMIT / BACKEND ANDA
-      CARA CEPAT:
-      1. Buka https://formsubmit.co/
-      2. Ganti EMAIL TUJUAN DI action
-      3. Setelah deploy, akan ada email verifikasi
-    -->
     <form id="ppdbForm"
       action="https://formsubmit.co/smkmuhammadiyahgp2016@gmail.com"
       method="POST"
       enctype="multipart/form-data">
 
-      <!-- Hidden settings FormSubmit -->
       <input type="hidden" name="_subject" value="PPDB Baru SMK Muhammadiyah Gunungputri 2026/2027">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
@@ -599,6 +665,24 @@
             <label for="tahunAjaran">Tahun Ajaran</label>
             <input type="text" id="tahunAjaran" name="Tahun Ajaran" value="2026/2027" readonly>
           </div>
+          <div class="form-group">
+            <label for="gelombang">Gelombang Pendaftaran</label>
+            <select id="gelombang" name="Gelombang Pendaftaran" required>
+              <option value="">Pilih Gelombang</option>
+              <option>Gelombang 1</option>
+              <option>Gelombang 2</option>
+              <option>Gelombang 3</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="jalurPendaftaran">Jalur Pendaftaran</label>
+            <select id="jalurPendaftaran" name="Jalur Pendaftaran" required>
+              <option value="">Pilih Jalur</option>
+              <option>Reguler</option>
+              <option>Prestasi</option>
+              <option>Rekomendasi</option>
+            </select>
+          </div>
         </div>
       </fieldset>
 
@@ -612,6 +696,14 @@
           <div class="form-group">
             <label for="namaPanggilan">Nama Panggilan</label>
             <input type="text" id="namaPanggilan" name="Nama Panggilan">
+          </div>
+          <div class="form-group">
+            <label for="jenisKelamin">Jenis Kelamin</label>
+            <select id="jenisKelamin" name="Jenis Kelamin" required>
+              <option value="">Pilih Jenis Kelamin</option>
+              <option>Laki-laki</option>
+              <option>Perempuan</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="tempatLahir">Tempat Lahir</label>
@@ -654,9 +746,29 @@
             <label for="kk">Nomor Kartu Keluarga</label>
             <input type="text" id="kk" name="Nomor KK" maxlength="16" required>
           </div>
-          <div class="form-group full">
+          <div class="form-group">
+            <label for="nisn">NISN</label>
+            <input type="text" id="nisn" name="NISN" maxlength="10" required>
+          </div>
+          <div class="form-group">
+            <label for="emailSiswa">Email Siswa</label>
+            <input type="email" id="emailSiswa" name="Email Siswa" placeholder="contoh@email.com">
+          </div>
+          <div class="form-group">
+            <label for="hpSiswa">No. HP / WhatsApp Siswa</label>
+            <input type="tel" id="hpSiswa" name="HP Siswa" placeholder="08xxxxxxxxxx">
+          </div>
+          <div class="form-group">
             <label for="bahasaSehari">Bahasa Sehari-hari</label>
             <input type="text" id="bahasaSehari" name="Bahasa Sehari-hari">
+          </div>
+          <div class="form-group">
+            <label for="citaCita">Cita-cita</label>
+            <input type="text" id="citaCita" name="Cita-cita">
+          </div>
+          <div class="form-group">
+            <label for="kip">Nomor KIP / KKS / PKH (jika ada)</label>
+            <input type="text" id="kip" name="Nomor KIP/KKS/PKH">
           </div>
         </div>
       </fieldset>
@@ -667,6 +779,14 @@
           <div class="form-group">
             <label for="namaAyah">Nama Ayah</label>
             <input type="text" id="namaAyah" name="Nama Ayah" required>
+          </div>
+          <div class="form-group">
+            <label for="statusAyah">Status Ayah</label>
+            <select id="statusAyah" name="Status Ayah">
+              <option value="">Pilih Status</option>
+              <option>Masih Ada</option>
+              <option>Meninggal Dunia</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="ttlAyah">Tempat, Tanggal Lahir Ayah</label>
@@ -685,13 +805,25 @@
             <input type="text" id="penghasilanAyah" name="Penghasilan Ayah">
           </div>
           <div class="form-group">
-            <label for="hpAyah">No. HP Ayah</label>
+            <label for="hpAyah">No. HP / WhatsApp Ayah</label>
             <input type="tel" id="hpAyah" name="HP Ayah">
+          </div>
+          <div class="form-group">
+            <label for="emailAyah">Email Ayah</label>
+            <input type="email" id="emailAyah" name="Email Ayah">
           </div>
 
           <div class="form-group">
             <label for="namaIbu">Nama Ibu</label>
             <input type="text" id="namaIbu" name="Nama Ibu" required>
+          </div>
+          <div class="form-group">
+            <label for="statusIbu">Status Ibu</label>
+            <select id="statusIbu" name="Status Ibu">
+              <option value="">Pilih Status</option>
+              <option>Masih Ada</option>
+              <option>Meninggal Dunia</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="ttlIbu">Tempat, Tanggal Lahir Ibu</label>
@@ -710,8 +842,21 @@
             <input type="text" id="penghasilanIbu" name="Penghasilan Ibu">
           </div>
           <div class="form-group">
-            <label for="hpIbu">No. HP Ibu</label>
+            <label for="hpIbu">No. HP / WhatsApp Ibu</label>
             <input type="tel" id="hpIbu" name="HP Ibu">
+          </div>
+          <div class="form-group">
+            <label for="emailIbu">Email Ibu</label>
+            <input type="email" id="emailIbu" name="Email Ibu">
+          </div>
+
+          <div class="form-group">
+            <label for="namaWali">Nama Wali (jika ada)</label>
+            <input type="text" id="namaWali" name="Nama Wali">
+          </div>
+          <div class="form-group">
+            <label for="hpWali">No. HP / WhatsApp Wali</label>
+            <input type="tel" id="hpWali" name="HP Wali">
           </div>
         </div>
       </fieldset>
@@ -722,6 +867,10 @@
           <div class="form-group full">
             <label for="alamatLengkap">Alamat Lengkap</label>
             <textarea id="alamatLengkap" name="Alamat Lengkap" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="kodePos">Kode Pos</label>
+            <input type="text" id="kodePos" name="Kode Pos">
           </div>
           <div class="form-group">
             <label for="tinggalDengan">Tinggal Dengan</label>
@@ -735,9 +884,31 @@
             <label for="transportasi">Ke Sekolah Menggunakan</label>
             <input type="text" id="transportasi" name="Transportasi ke Sekolah">
           </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Data Sekolah Asal</legend>
+        <div class="grid">
           <div class="form-group">
             <label for="asalSekolah">Asal Sekolah</label>
             <input type="text" id="asalSekolah" name="Asal Sekolah" required>
+          </div>
+          <div class="form-group">
+            <label for="statusSekolahAsal">Status Sekolah Asal</label>
+            <select id="statusSekolahAsal" name="Status Sekolah Asal">
+              <option value="">Pilih Status</option>
+              <option>Negeri</option>
+              <option>Swasta</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="tahunLulus">Tahun Lulus</label>
+            <input type="number" id="tahunLulus" name="Tahun Lulus" min="2020" max="2030">
+          </div>
+          <div class="form-group">
+            <label for="nilaiRata">Nilai Rata-rata (Opsional)</label>
+            <input type="text" id="nilaiRata" name="Nilai Rata-rata">
           </div>
           <div class="form-group full">
             <label for="alamatSekolahAsal">Alamat Sekolah Asal</label>
@@ -747,7 +918,7 @@
       </fieldset>
 
       <fieldset>
-        <legend>Kesehatan & Minat</legend>
+        <legend>Data Kesehatan</legend>
         <div class="grid-3">
           <div class="form-group">
             <label for="tinggiBadan">Tinggi Badan (cm)</label>
@@ -775,9 +946,23 @@
             <textarea id="riwayatPenyakit" name="Riwayat Penyakit"></textarea>
           </div>
           <div class="form-group">
-            <label for="kelainanJasmani">Kelainan Jasmani / Lainnya</label>
+            <label for="kelainanJasmani">Kelainan Jasmani / Kondisi Khusus</label>
             <textarea id="kelainanJasmani" name="Kelainan Jasmani"></textarea>
           </div>
+          <div class="form-group">
+            <label for="alergi">Alergi (jika ada)</label>
+            <input type="text" id="alergi" name="Alergi">
+          </div>
+          <div class="form-group">
+            <label for="riwayatRawat">Riwayat Rawat Inap / Operasi</label>
+            <input type="text" id="riwayatRawat" name="Riwayat Rawat Inap/Operasi">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Minat, Bakat & Aktivitas</legend>
+        <div class="grid">
           <div class="form-group">
             <label for="kesenian">Kesenian</label>
             <input type="text" id="kesenian" name="Kesenian">
@@ -791,6 +976,14 @@
             <input type="text" id="organisasi" name="Organisasi">
           </div>
           <div class="form-group">
+            <label for="prestasi">Prestasi</label>
+            <input type="text" id="prestasi" name="Prestasi">
+          </div>
+          <div class="form-group">
+            <label for="hobi">Hobi</label>
+            <input type="text" id="hobi" name="Hobi">
+          </div>
+          <div class="form-group">
             <label for="lainnya">Lain-lain</label>
             <input type="text" id="lainnya" name="Lain-lain">
           </div>
@@ -798,7 +991,7 @@
       </fieldset>
 
       <fieldset>
-        <legend>Jurusan Pilihan & Upload Berkas</legend>
+        <legend>Jurusan Pilihan & Informasi PPDB</legend>
         <div class="grid">
           <div class="form-group">
             <label for="jurusan">Jurusan Pilihan</label>
@@ -808,9 +1001,29 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="namaWali">Nama Orang Tua / Wali</label>
-            <input type="text" id="namaWali" name="Nama Orang Tua/Wali" required>
+            <label for="sumberInfo">Mengetahui Sekolah Dari</label>
+            <select id="sumberInfo" name="Sumber Informasi">
+              <option value="">Pilih Sumber Informasi</option>
+              <option>Instagram</option>
+              <option>Facebook</option>
+              <option>Website</option>
+              <option>Teman</option>
+              <option>Guru</option>
+              <option>Brosur</option>
+              <option>Orang Tua</option>
+              <option>Lainnya</option>
+            </select>
           </div>
+          <div class="form-group full">
+            <label for="alasanMasuk">Alasan Memilih SMK Muhammadiyah Gunungputri</label>
+            <textarea id="alasanMasuk" name="Alasan Memilih Sekolah"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Upload Berkas</legend>
+        <div class="grid">
           <div class="form-group">
             <label for="fileAkte">Upload Akte Kelahiran</label>
             <input type="file" id="fileAkte" name="Akte Kelahiran" accept=".pdf,.jpg,.jpeg,.png">
@@ -825,8 +1038,19 @@
           </div>
           <div class="form-group">
             <label for="fileNISN">Upload NISN</label>
-            <input type="file" id="fileNISN" name="NISN" accept=".pdf,.jpg,.jpeg,.png">
+            <input type="file" id="fileNISN" name="NISN File" accept=".pdf,.jpg,.jpeg,.png">
           </div>
+          <div class="form-group">
+            <label for="filePasFoto">Upload Pas Foto</label>
+            <input type="file" id="filePasFoto" name="Pas Foto" accept=".jpg,.jpeg,.png">
+          </div>
+          <div class="form-group">
+            <label for="fileKtpOrtu">Upload KTP Orang Tua / Wali</label>
+            <input type="file" id="fileKtpOrtu" name="KTP Orang Tua/Wali" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+        </div>
+        <div class="small-text">
+          Maksimalkan ukuran file agar proses upload lebih ringan. Disarankan format JPG, PNG, atau PDF.
         </div>
       </fieldset>
 
@@ -834,7 +1058,7 @@
         <legend>Pernyataan</legend>
         <div class="checkbox-wrap">
           <input type="checkbox" id="pernyataan" name="Pernyataan" required>
-          <label for="pernyataan" style="font-weight:600; color:#333;">
+          <label for="pernyataan">
             Saya menyatakan bahwa seluruh data yang saya isi adalah benar.
             Apabila di kemudian hari terdapat data yang tidak benar/palsu,
             maka saya bersedia menerima konsekuensi sesuai ketentuan yang berlaku
@@ -907,6 +1131,10 @@
       return data;
     }
 
+    function safe(val) {
+      return val && String(val).trim() !== "" ? val : "-";
+    }
+
     function buildTextProof(data) {
       return `
 ========================================
@@ -915,77 +1143,112 @@ SMK MUHAMMADIYAH GUNUNGPUTRI
 TAHUN AJARAN 2026/2027
 ========================================
 
-Nomor Pendaftaran : ${data["Nomor Pendaftaran"] || "-"}
+Nomor Pendaftaran : ${safe(data["Nomor Pendaftaran"])}
 Tanggal Cetak     : ${new Date().toLocaleString("id-ID")}
+Tahun Ajaran      : ${safe(data["Tahun Ajaran"])}
+Gelombang         : ${safe(data["Gelombang Pendaftaran"])}
+Jalur             : ${safe(data["Jalur Pendaftaran"])}
 
 =========================
 DATA CALON SISWA
 =========================
-Nama Lengkap      : ${data["Nama Lengkap"] || "-"}
-Nama Panggilan    : ${data["Nama Panggilan"] || "-"}
-Tempat Lahir      : ${data["Tempat Lahir"] || "-"}
-Tanggal Lahir     : ${data["Tanggal Lahir"] || "-"}
-Agama             : ${data["Agama"] || "-"}
-Kewarganegaraan   : ${data["Kewarganegaraan"] || "-"}
-NIK               : ${data["NIK"] || "-"}
-Nomor KK          : ${data["Nomor KK"] || "-"}
-Anak Ke           : ${data["Anak Ke"] || "-"}
-Jumlah Saudara    : ${data["Jumlah Saudara Kandung"] || "-"}
-Bahasa Sehari-hari: ${data["Bahasa Sehari-hari"] || "-"}
+Nama Lengkap      : ${safe(data["Nama Lengkap"])}
+Nama Panggilan    : ${safe(data["Nama Panggilan"])}
+Jenis Kelamin     : ${safe(data["Jenis Kelamin"])}
+Tempat Lahir      : ${safe(data["Tempat Lahir"])}
+Tanggal Lahir     : ${safe(data["Tanggal Lahir"])}
+Agama             : ${safe(data["Agama"])}
+Kewarganegaraan   : ${safe(data["Kewarganegaraan"])}
+NIK               : ${safe(data["NIK"])}
+Nomor KK          : ${safe(data["Nomor KK"])}
+NISN              : ${safe(data["NISN"])}
+Anak Ke           : ${safe(data["Anak Ke"])}
+Jumlah Saudara    : ${safe(data["Jumlah Saudara Kandung"])}
+Bahasa Harian     : ${safe(data["Bahasa Sehari-hari"])}
+Email Siswa       : ${safe(data["Email Siswa"])}
+HP Siswa          : ${safe(data["HP Siswa"])}
+Cita-cita         : ${safe(data["Cita-cita"])}
+KIP/KKS/PKH       : ${safe(data["Nomor KIP/KKS/PKH"])}
 
 =========================
-DATA ORANG TUA
+DATA ORANG TUA / WALI
 =========================
-Nama Ayah         : ${data["Nama Ayah"] || "-"}
-TTL Ayah          : ${data["TTL Ayah"] || "-"}
-Pendidikan Ayah   : ${data["Pendidikan Ayah"] || "-"}
-Pekerjaan Ayah    : ${data["Pekerjaan Ayah"] || "-"}
-Penghasilan Ayah  : ${data["Penghasilan Ayah"] || "-"}
-HP Ayah           : ${data["HP Ayah"] || "-"}
+Nama Ayah         : ${safe(data["Nama Ayah"])}
+Status Ayah       : ${safe(data["Status Ayah"])}
+TTL Ayah          : ${safe(data["TTL Ayah"])}
+Pendidikan Ayah   : ${safe(data["Pendidikan Ayah"])}
+Pekerjaan Ayah    : ${safe(data["Pekerjaan Ayah"])}
+Penghasilan Ayah  : ${safe(data["Penghasilan Ayah"])}
+HP Ayah           : ${safe(data["HP Ayah"])}
+Email Ayah        : ${safe(data["Email Ayah"])}
 
-Nama Ibu          : ${data["Nama Ibu"] || "-"}
-TTL Ibu           : ${data["TTL Ibu"] || "-"}
-Pendidikan Ibu    : ${data["Pendidikan Ibu"] || "-"}
-Pekerjaan Ibu     : ${data["Pekerjaan Ibu"] || "-"}
-Penghasilan Ibu   : ${data["Penghasilan Ibu"] || "-"}
-HP Ibu            : ${data["HP Ibu"] || "-"}
+Nama Ibu          : ${safe(data["Nama Ibu"])}
+Status Ibu        : ${safe(data["Status Ibu"])}
+TTL Ibu           : ${safe(data["TTL Ibu"])}
+Pendidikan Ibu    : ${safe(data["Pendidikan Ibu"])}
+Pekerjaan Ibu     : ${safe(data["Pekerjaan Ibu"])}
+Penghasilan Ibu   : ${safe(data["Penghasilan Ibu"])}
+HP Ibu            : ${safe(data["HP Ibu"])}
+Email Ibu         : ${safe(data["Email Ibu"])}
 
-=========================
-ALAMAT & SEKOLAH ASAL
-=========================
-Alamat Lengkap    : ${data["Alamat Lengkap"] || "-"}
-Tinggal Dengan    : ${data["Tinggal Dengan"] || "-"}
-Jarak ke Sekolah  : ${data["Jarak Rumah ke Sekolah"] || "-"}
-Transportasi      : ${data["Transportasi ke Sekolah"] || "-"}
-Asal Sekolah      : ${data["Asal Sekolah"] || "-"}
-Alamat Sekolah    : ${data["Alamat Sekolah Asal"] || "-"}
+Nama Wali         : ${safe(data["Nama Wali"])}
+HP Wali           : ${safe(data["HP Wali"])}
 
 =========================
-KESEHATAN & MINAT
+ALAMAT & TEMPAT TINGGAL
 =========================
-Tinggi Badan      : ${data["Tinggi Badan"] || "-"} cm
-Berat Badan       : ${data["Berat Badan"] || "-"} kg
-Golongan Darah    : ${data["Golongan Darah"] || "-"}
-Riwayat Penyakit  : ${data["Riwayat Penyakit"] || "-"}
-Kelainan Jasmani  : ${data["Kelainan Jasmani"] || "-"}
-Kesenian          : ${data["Kesenian"] || "-"}
-Olahraga          : ${data["Olahraga"] || "-"}
-Organisasi        : ${data["Organisasi"] || "-"}
-Lain-lain         : ${data["Lain-lain"] || "-"}
+Alamat Lengkap    : ${safe(data["Alamat Lengkap"])}
+Kode Pos          : ${safe(data["Kode Pos"])}
+Tinggal Dengan    : ${safe(data["Tinggal Dengan"])}
+Jarak ke Sekolah  : ${safe(data["Jarak Rumah ke Sekolah"])}
+Transportasi      : ${safe(data["Transportasi ke Sekolah"])}
+
+=========================
+SEKOLAH ASAL
+=========================
+Asal Sekolah      : ${safe(data["Asal Sekolah"])}
+Status Sekolah    : ${safe(data["Status Sekolah Asal"])}
+Tahun Lulus       : ${safe(data["Tahun Lulus"])}
+Nilai Rata-rata   : ${safe(data["Nilai Rata-rata"])}
+Alamat Sekolah    : ${safe(data["Alamat Sekolah Asal"])}
+
+=========================
+DATA KESEHATAN
+=========================
+Tinggi Badan      : ${safe(data["Tinggi Badan"])} cm
+Berat Badan       : ${safe(data["Berat Badan"])} kg
+Golongan Darah    : ${safe(data["Golongan Darah"])}
+Riwayat Penyakit  : ${safe(data["Riwayat Penyakit"])}
+Kelainan Jasmani  : ${safe(data["Kelainan Jasmani"])}
+Alergi            : ${safe(data["Alergi"])}
+Rawat/Operasi     : ${safe(data["Riwayat Rawat Inap/Operasi"])}
+
+=========================
+MINAT, BAKAT & AKTIVITAS
+=========================
+Kesenian          : ${safe(data["Kesenian"])}
+Olahraga          : ${safe(data["Olahraga"])}
+Organisasi        : ${safe(data["Organisasi"])}
+Prestasi          : ${safe(data["Prestasi"])}
+Hobi              : ${safe(data["Hobi"])}
+Lain-lain         : ${safe(data["Lain-lain"])}
 
 =========================
 PILIHAN PENDAFTARAN
 =========================
-Jurusan Pilihan   : ${data["Jurusan Pilihan"] || "-"}
-Nama Wali         : ${data["Nama Orang Tua/Wali"] || "-"}
+Jurusan Pilihan   : ${safe(data["Jurusan Pilihan"])}
+Sumber Informasi  : ${safe(data["Sumber Informasi"])}
+Alasan Memilih    : ${safe(data["Alasan Memilih Sekolah"])}
 
 =========================
 UPLOAD BERKAS
 =========================
-Akte Kelahiran    : ${data["Akte Kelahiran"] || "-"}
-Kartu Keluarga    : ${data["Kartu Keluarga"] || "-"}
-Ijazah / SKL      : ${data["Ijazah / SKL"] || "-"}
-NISN              : ${data["NISN"] || "-"}
+Akte Kelahiran    : ${safe(data["Akte Kelahiran"])}
+Kartu Keluarga    : ${safe(data["Kartu Keluarga"])}
+Ijazah / SKL      : ${safe(data["Ijazah / SKL"])}
+NISN File         : ${safe(data["NISN File"])}
+Pas Foto          : ${safe(data["Pas Foto"])}
+KTP Ortu/Wali     : ${safe(data["KTP Orang Tua/Wali"])}
 
 ========================================
 STATUS: FORMULIR TELAH DIISI
@@ -1021,10 +1284,10 @@ SMK Muhammadiyah Gunungputri.
 
       const data = getFormDataObject(form);
 
-      // 1) Download bukti otomatis
+      // 1. Download bukti otomatis
       downloadProof(data);
 
-      // 2) Tampilkan notifikasi sukses
+      // 2. Tampilkan notifikasi sukses
       resultText.innerHTML = `
         Nomor Pendaftaran Anda adalah <strong>${data["Nomor Pendaftaran"]}</strong>.<br>
         Simpan bukti pendaftaran untuk proses verifikasi administrasi.
@@ -1032,7 +1295,7 @@ SMK Muhammadiyah Gunungputri.
       resultBox.style.display = "block";
       resultBox.scrollIntoView({ behavior: "smooth", block: "center" });
 
-      // 3) Kirim data ke email via FormSubmit
+      // 3. Kirim data ke email via FormSubmit
       const formData = new FormData(form);
 
       try {
@@ -1047,7 +1310,7 @@ SMK Muhammadiyah Gunungputri.
         console.error("Gagal kirim email:", error);
       }
 
-      // 4) Siapkan nomor baru jika ingin input pendaftar berikutnya
+      // 4. Siapkan nomor baru
       setTimeout(() => {
         nomorInput.value = generateRegistrationNumber();
       }, 1200);
